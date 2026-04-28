@@ -3,14 +3,14 @@ export const UsersData = [
   "id": 1,
   "email": "john@mail.com",
   "name": "Jhon",
-  "role": "customer",
+  "role": "user",
   "status" : "Active"
 },
     {
   "id": 2,
   "email": "willim@mail.com",
   "name": "willim",
-  "role": "customer",
+  "role": "user",
   "status" : "Inactive"
 },
     {
@@ -24,7 +24,7 @@ export const UsersData = [
   "id": 4,
   "email": "karan@mail.com",
   "name": "karan",
-  "role": "customer",
+  "role": "user",
   "status" : "Inactive"
 },
     {
