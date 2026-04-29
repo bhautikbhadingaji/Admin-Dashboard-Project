@@ -1,6 +1,8 @@
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { NavLink } from 'react-router-dom'
+import { LuUsers } from "react-icons/lu";
+import { BiLogIn } from "react-icons/bi";
 
 const user = {
   name: 'Tom Cook',
@@ -31,8 +33,9 @@ export const Dashboard = ({title = "Dashboard"}) => {
                                     />
                                 </div>
                                 <div className="hidden md:block">
-                                    <div className="ml-10 flex items-baseline space-x-4">
-                                        <NavLink to={"/user-management"}>
+                                    <div className="ml-10 flex items-baseline space-x-4 text-black text-bold">
+                                        <NavLink to={"/user-management"} className= "flex gap-1 hover:underline">
+                                        <LuUsers className='mt-1'/>
                                              User Management
                                         </NavLink>
                                     </div>
@@ -48,9 +51,11 @@ export const Dashboard = ({title = "Dashboard"}) => {
                                         <span className="sr-only">View notifications</span>
                                         <BellIcon aria-hidden="true" className="size-6" />
                                     </button>
-
+                                        <button className='text-blck bg-green-400 box-border border border-transparent hover:bg-success-strong focus:ring-4 focus:ring-success-medium shadow-xs font-semibold leading-5 rounded-full text-sm px-4 py-2.5 focus:outline-none cursor-pointer flex items-center'>
+                                            Login <BiLogIn className='mt-1'/>
+                                        </button>
                                     {/* Profile dropdown */}
-                                    <Menu as="div" className="relative ml-3">
+                                    {/* <Menu as="div" className="relative ml-3">
                                         <MenuButton className="relative flex max-w-xs items-center rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">
                                             <span className="absolute -inset-1.5" />
                                             <span className="sr-only">Open user menu</span>
@@ -66,7 +71,7 @@ export const Dashboard = ({title = "Dashboard"}) => {
                                             className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-gray-800 py-1 outline-1 -outline-offset-1 outline-white/10 transition data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in"
                                         >
                                         </MenuItems>
-                                    </Menu>
+                                    </Menu> */}
                                 </div>
                             </div>
                             <div className="-mr-2 flex md:hidden">

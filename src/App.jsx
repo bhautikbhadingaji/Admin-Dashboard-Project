@@ -3,11 +3,13 @@ import './App.css'
 import { LoginPage } from './pages/LoginPage'
 import { Dashboard } from './components/Dashboard'
 import { UserManagement } from './components/User-Management'
+import { Toaster } from 'react-hot-toast'
 
 export const App = () => {
 
   return (
    <>
+    <Toaster position="top-right" reverseOrder={false} />
    <BrowserRouter>
    <Routes>
     <Route path='/login' element = {<LoginPage/>}/>
