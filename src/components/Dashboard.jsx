@@ -1,8 +1,9 @@
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import { LuUsers } from "react-icons/lu";
 import { BiLogIn } from "react-icons/bi";
+import toast from 'react-hot-toast';
 
 const user = {
   name: 'Tom Cook',
@@ -17,12 +18,22 @@ function classNames(...classes) {
 
 export const Dashboard = ({title = "Dashboard"}) => {
 
+    const navigate = useNavigate();
+    
+    const isLoggedIn = localStorage.getItem("user");
+
+    const handleLogout = () => {
+        localStorage.removeItem("user"); 
+        toast.success("Logged out successfully");
+        navigate("/login"); 
+    };
+
     return (
         <>
 
             <div className="min-h-full">
-                <Disclosure as="nav" className="bg-gray-800/50">
-                    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                <Disclosure as="nav" className="bg-gray-800">
+                    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 ">
                         <div className="flex h-16 items-center justify-between">
                             <div className="flex items-center">
                                 <div className="shrink-0">
@@ -33,7 +44,7 @@ export const Dashboard = ({title = "Dashboard"}) => {
                                     />
                                 </div>
                                 <div className="hidden md:block">
-                                    <div className="ml-10 flex items-baseline space-x-4 text-black text-bold">
+                                    <div className="ml-10 flex items-baseline space-x-4 text-white text-bold">
                                         <NavLink to={"/user-management"} className= "flex gap-1 hover:underline">
                                         <LuUsers className='mt-1'/>
                                              User Management
@@ -51,9 +62,11 @@ export const Dashboard = ({title = "Dashboard"}) => {
                                         <span className="sr-only">View notifications</span>
                                         <BellIcon aria-hidden="true" className="size-6" />
                                     </button>
-                                        <button className='text-blck bg-green-400 box-border border border-transparent hover:bg-success-strong focus:ring-4 focus:ring-success-medium shadow-xs font-semibold leading-5 rounded-full text-sm px-4 py-2.5 focus:outline-none cursor-pointer flex items-center'>
+                                        <NavLink 
+                                        to={"/login"}
+                                        className='text-blck bg-green-400 box-border border border-transparent hover:bg-success-strong focus:ring-4 focus:ring-success-medium shadow-xs font-semibold leading-5 rounded-full text-sm px-4 py-2.5 focus:outline-none cursor-pointer flex items-center'>
                                             Login <BiLogIn className='mt-1'/>
-                                        </button>
+                                        </NavLink>
                                     {/* Profile dropdown */}
                                     {/* <Menu as="div" className="relative ml-3">
                                         <MenuButton className="relative flex max-w-xs items-center rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">
@@ -114,12 +127,6 @@ export const Dashboard = ({title = "Dashboard"}) => {
                         </div>
                     </DisclosurePanel>
                 </Disclosure>
-
-                <header className="relative bg-gray-800 after:pointer-events-none after:absolute after:inset-x-0 after:inset-y-0 after:border-y after:border-white/10">
-                    <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-                        <h1 className="text-3xl font-bold tracking-tight text-white">{title}</h1>
-                    </div>
-                </header>
                 <main>
                     <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">{/* Your content */}</div>
                 </main>

@@ -13,9 +13,8 @@ export const UserManagement = () => {
     const [openForm, setOpenForm] = useState(false)
     const [searchTerm, setSearchTerm] = useState("");
     const [filterTerm, setFilterTerm] = useState("");
-    const [updatedData, setUpdatedData] = useState({})
+    const [updatedData, setUpdatedData] = useState(null)
 
-    console.log("updatedData",updatedData)
 
     const handleDeleteUser = (item) => {
         setIsOpen(true)
@@ -30,17 +29,28 @@ export const UserManagement = () => {
         toast.success("Add Delete Successfully")
     }
 
-    const handleAddUser = (NewUser) => {
-        setOpenForm(true)
-        const userWithId = { ...NewUser, id: Date.now() };
+    const handleAddUser = (userData) => {
+    if (userData.id) {
+        const updatedUsers = users.map((user) =>
+            user.id === userData.id ? userData : user
+        );
+        setUsers(updatedUsers);
+        toast.success("User Updated Successfully");
+    } else {
+        const userWithId = { ...userData, id: Date.now() };
         setUsers([...users, userWithId]);
-        toast.success("User Add Succesfully")
-        setOpenForm(false)
+        toast.success("User Added Successfully");
     }
+    
+    setOpenForm(false);
+    setUpdatedData(null); 
+};
 
     const handleUpdateUser = (item) => {
         setOpenForm(true)
         setUpdatedData(item)
+        // setUsers((item) =>item.id === users.id ? users : null)
+        
     }
 
     const handleSearchChange = (e) => {
@@ -77,13 +87,16 @@ export const UserManagement = () => {
                     placeholder="Search User"
                     className="shadow appearance-none border border-gray-500 rounded text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
                 <button
-                    onClick={()=>setOpenForm(true)}
+                    onClick={()=>
+                      { setOpenForm(true);
+                        setUpdatedData(null)
+                    }}
                     className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded cursor-pointer">
                     +Add User
                 </button>
             </div>
 
-            {openForm ? <AddUserForm handleAddUser={handleAddUser} updatedData={updatedData}/> : null}
+            {openForm ? <AddUserForm handleAddUser={handleAddUser} updatedData={updatedData} setOpenForm={setOpenForm} openForm={openForm}/> : null}
 
             <div className="flex flex-col text-center ml-15 mr-15 mt-10">
                 <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
