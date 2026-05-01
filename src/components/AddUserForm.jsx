@@ -29,6 +29,7 @@ export const AddUserForm = ({ handleAddUser, updatedData, setOpenForm, openForm 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setInputData({ ...inputData, [name]: value });
+        console.log("value",value)
     };
 
     const handleFormSubmit = async (e) => {
