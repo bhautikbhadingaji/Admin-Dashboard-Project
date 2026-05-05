@@ -29,7 +29,6 @@ export const AddUserForm = ({ handleAddUser, updatedData, setOpenForm, openForm 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setInputData({ ...inputData, [name]: value });
-        console.log("value",value)
     };
 
     const handleFormSubmit = async (e) => {
@@ -78,7 +77,7 @@ export const AddUserForm = ({ handleAddUser, updatedData, setOpenForm, openForm 
                                         </button>
                                     </div>
                                 </TransitionChild>
-                                <div className="relative flex h-full flex-col overflow-y-auto bg-gray-800 py-6 shadow-xl after:absolute after:inset-y-0 after:left-0 after:w-px after:bg-white/10">
+                                <div className="relative flex h-full flex-col overflow-y-auto dark:bg-gray-800 bg-white py-6 shadow-xl after:absolute after:inset-y-0 after:left-0 after:w-px after:bg-white/10">
                                     <div className="px-4 sm:px-6">
                                         <DialogTitle className="text-base font-semibold text-white">Form</DialogTitle>
                                     </div>

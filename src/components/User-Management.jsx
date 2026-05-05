@@ -77,10 +77,11 @@ export const UserManagement = () => {
 
     return (
         <>
+       <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-300">
             <Dashboard title="User Managment" />
             <DeleteConfirmModel isOpen={isOpen} setIsOpen={setIsOpen} confirmDelete={confirmDelete} />
             <div className="flex justify-end mr-15 gap-4">
-                <select className="shadow appearance-none border border-gray-500 rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline cursor-pointer"
+                <select className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
                     onChange={handleFilterChange}
                     value={filterTerm}>
                     <option value="All">Filter By status 🔻</option>
@@ -92,7 +93,7 @@ export const UserManagement = () => {
                     value={searchTerm}
                     onChange={handleSearchChange}
                     placeholder=" Search User"
-                    className="shadow appearance-none border border-gray-500 rounded text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+                    className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" />
                 <button
                     onClick={() => {
                         setOpenForm(true);
@@ -110,7 +111,7 @@ export const UserManagement = () => {
                     <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8">
                         <div className="overflow-hidden">
                             <table className="min-w-full text-left text-sm font-light">
-                                <thead className="border-b font-medium dark:border-neutral-500 text-center bg-gray-700">
+                               <thead className="border-b font-medium bg-gray-100 dark:bg-gray-800 dark:border-gray-700 text-gray-700 dark:text-gray-200">
                                     <tr>
                                         <th scope="col" className="px-6 py-4">Email</th>
                                         <th scope="col" className="px-6 py-4">Name</th>
@@ -119,13 +120,13 @@ export const UserManagement = () => {
                                         <th scope="col" className="px-6 py-4">Action</th>
                                     </tr>
                                 </thead>
-                                <tbody className="text-center bg-gray-300">
+                                <tbody className="bg-white dark:bg-gray-800 divide-y dark:divide-gray-700">
                                     {currentUsers.map((item) =>
-                                        <tr key={item.id} className="border-b dark:border-neutral-500 hover:bg-gray-400 cursor-pointer">
-                                            <td>{item.email} </td>
-                                            <td>{item.name}</td>
-                                            <td>{item.role}</td>
-                                            <td>{item.status}</td>
+                                        <tr key={item.id} className="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                                            <td className="px-6 py-4">{item.email} </td>
+                                            <td className="px-6 py-4">{item.name}</td>
+                                            <td className="px-6 py-4">{item.role}</td>
+                                            <td className="px-6 py-4">{item.status}</td>
                                             <td>
                                                 <div className="flex-center">
 
@@ -145,19 +146,19 @@ export const UserManagement = () => {
                                     )}
                                 </tbody>
                             </table>
-                            <div className="flex items-center justify-between border-t border-white/10 py-1 sm:px-6 bg-gray-700">
-                                <span className= "bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-0.5 px-5 rounded-l">
+                            <div className="flex items-center justify-between border-t border-gray-200 dark:border-gray-700 py-3 px-6 bg-gray-50 dark:bg-gray-800">
+                                <span className= "text-sm text-gray-700 dark:text-gray-400">
                                     Page {currentPage} of {totalPages}
                                 </span>
                                 <div className="flex flex-end gap-5">
                                     <button
-                                        className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-0.5 px-4 rounded-l cursor-pointer"
+                                        className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-700"
                                         disabled={currentPage === 1}
                                         onClick={() => setCurrentPage(prev => prev - 1)}>
                                         ←Prev
                                     </button>
                                     <button
-                                        className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-0.5 px-4 rounded-r border-l border-gray-400 cursor-pointer"
+                                        className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-700"
                                         disabled={currentPage === totalPages}
                                         onClick={() => setCurrentPage(prev => prev + 1)}>
                                         Next→
@@ -167,6 +168,7 @@ export const UserManagement = () => {
                         </div>
                     </div>
                 </div>
+            </div>
             </div>
         </>
     )

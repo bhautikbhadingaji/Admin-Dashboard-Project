@@ -4,20 +4,17 @@ import { NavLink, useNavigate } from 'react-router-dom'
 import { LuUsers } from "react-icons/lu";
 import { BiLogIn } from "react-icons/bi";
 import toast from 'react-hot-toast';
-import { HiMoon,  HiSun } from "react-icons/hi";
-
-// const user = {
-//   name: 'Tom Cook',
-//   email: 'tom@example.com',
-//   imageUrl:
-//     'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-// }
+import { HiMoon, HiSun } from "react-icons/hi";
+import { useContext } from 'react';
+import { ThemeContext } from '../context/ThemeContex';
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
 }
 
 export const Dashboard = ({ title = "Dashboard" }) => {
+
+    const { toggleTheme, theme } = useContext(ThemeContext);
 
     const navigate = useNavigate();
 
@@ -33,7 +30,7 @@ export const Dashboard = ({ title = "Dashboard" }) => {
         <>
 
             <div className="min-h-full">
-                <Disclosure as="nav" className="bg-gray-800">
+                <Disclosure as="nav" className="dark:bg-gray-800 bg-white ">
                     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 ">
                         <div className="flex h-16 items-center justify-between">
                             <div className="flex items-center">
@@ -45,7 +42,7 @@ export const Dashboard = ({ title = "Dashboard" }) => {
                                     />
                                 </div>
                                 <div className="hidden md:block">
-                                    <div className="ml-10 flex items-baseline space-x-4 text-white text-bold">
+                                    <div className="ml-10 flex items-baseline space-x-4 dark:text-white text-black  text-bold dark:border-black">
                                         <NavLink to={"/user-management"} className="flex gap-1 hover:underline">
                                             <LuUsers className='mt-1' />
                                             User Management
@@ -76,71 +73,42 @@ export const Dashboard = ({ title = "Dashboard" }) => {
 
                                     <div className="hidden md:flex items-center space-x-4">
                                         <button
-                                            // onClick={toggleTheme}
+                                            onClick={toggleTheme}
                                             className=" flex  p-2 rounded-full bg-gray-700 text-yellow-400 hover:bg-gray-600 transition"
                                         >
-                                             <HiMoon />  <HiSun />
+                                           {theme === "light" ? <HiMoon size={20} /> : <HiSun size={20} />}
                                         </button>
-</div>
-                                        {/* Profile dropdown */}
-                                        {/* <Menu as="div" className="relative ml-3">
-                                        <MenuButton className="relative flex max-w-xs items-center rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">
-                                            <span className="absolute -inset-1.5" />
-                                            <span className="sr-only">Open user menu</span>
-                                            <img
-                                                alt=""
-                                                src={user.imageUrl}
-                                                className="size-8 rounded-full outline -outline-offset-1 outline-white/10"
-                                            />
-                                        </MenuButton>
-
-                                        <MenuItems
-                                            transition
-                                            className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-gray-800 py-1 outline-1 -outline-offset-1 outline-white/10 transition data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in"
-                                        >
-                                        </MenuItems>
-                                    </Menu> */}
                                     </div>
                                 </div>
-                                <div className="-mr-2 flex md:hidden">
-                                    {/* Mobile menu button */}
-                                    <DisclosureButton className="group relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-white/5 hover:text-white focus:outline-2 focus:outline-offset-2 focus:outline-indigo-500">
-                                        <span className="absolute -inset-0.5" />
-                                        <span className="sr-only">Open main menu</span>
-                                        <Bars3Icon aria-hidden="true" className="block size-6 group-data-open:hidden" />
-                                        <XMarkIcon aria-hidden="true" className="hidden size-6 group-data-open:block" />
-                                    </DisclosureButton>
-                                </div>
+                            </div>
+                            <div className="-mr-2 flex md:hidden">
+                                {/* Mobile menu button */}
+                                <DisclosureButton className="group relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-white/5 hover:text-white focus:outline-2 focus:outline-offset-2 focus:outline-indigo-500">
+                                    <span className="absolute -inset-0.5" />
+                                    <span className="sr-only">Open main menu</span>
+                                    <Bars3Icon aria-hidden="true" className="block size-6 group-data-open:hidden" />
+                                    <XMarkIcon aria-hidden="true" className="hidden size-6 group-data-open:block" />
+                                </DisclosureButton>
                             </div>
                         </div>
+                    </div>
 
-                        <DisclosurePanel className="md:hidden">
-                            <div className="border-t border-white/10 pt-4 pb-3">
-                                <div className="flex items-center px-5">
-                                    {/* <div className="shrink-0">
-                                    <img
-                                        alt=""
-                                        src={user.imageUrl}
-                                        className="size-10 rounded-full outline -outline-offset-1 outline-white/10"
-                                    />
-                                </div>
-                                <div className="ml-3">
-                                    <div className="text-base/5 font-medium text-white">{user.name}</div>
-                                    <div className="text-sm font-medium text-gray-400">{user.email}</div>
-                                </div> */}
-                                    <button
-                                        type="button"
-                                        className="relative ml-auto shrink-0 rounded-full p-1 text-gray-400 hover:text-white focus:outline-2 focus:outline-offset-2 focus:outline-indigo-500"
-                                    >
-                                        <span className="absolute -inset-1.5" />
-                                        <span className="sr-only">View notifications</span>
-                                        <BellIcon aria-hidden="true" className="size-6" />
-                                    </button>
-                                </div>
-                                <div className="mt-3 space-y-1 px-2">
-                                </div>
+                    <DisclosurePanel className="md:hidden">
+                        <div className="border-t border-white/10 pt-4 pb-3">
+                            <div className="flex items-center px-5">
+                                <button
+                                    type="button"
+                                    className="relative ml-auto shrink-0 rounded-full p-1 text-gray-400 hover:text-white focus:outline-2 focus:outline-offset-2 focus:outline-indigo-500"
+                                >
+                                    <span className="absolute -inset-1.5" />
+                                    <span className="sr-only">View notifications</span>
+                                    <BellIcon aria-hidden="true" className="size-6" />
+                                </button>
                             </div>
-                        </DisclosurePanel>
+                            <div className="mt-3 space-y-1 px-2">
+                            </div>
+                        </div>
+                    </DisclosurePanel>
                 </Disclosure>
                 <main>
                     <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">{/* Your content */}</div>
